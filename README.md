@@ -12,6 +12,17 @@ They're organized by domain, with both platform formats side by side:
 
 The two formats carry the same instructions; only the frontmatter differs.
 
+## Quickstart
+
+```bash
+git clone https://github.com/saikrishnarallabandi/agents.git
+cd agents && ./install.sh
+```
+
+That's it. The script copies the Claude definitions to `~/.claude/agents/` and
+the Copilot ones to `~/.copilot/agents/`. Flags: `--claude-only`,
+`--copilot-only`. It only copies — never deletes anything.
+
 ## Catalog
 
 ### research
@@ -33,34 +44,27 @@ the claim doesn't survive its own threats section, it writes a different paper.
 | `coder` | The implementer in a write → review → fix loop. Reads the actual code first, fixes root causes only, returns files changed + how to exercise them + tests actually run. |
 | `code-reviewer` | Adversarial reviewer in a **fresh context** that never saw the code being written. Runs the tests, tries to break the error paths, returns a hard `PASS` / `CHANGES_REQUIRED` verdict. Read-only — it never edits; the coder applies fixes. |
 
-## Install
+## Using the agents
 
-**Claude Code** — copy the `.md` files to your subagent directory:
+**Claude Code** — after `./install.sh`, invoke via the Task tool, e.g.
+`subagent_type: "paper-writer"`. `paper-writer` calls `lit-reviewer` on its own
+for the scoop check; `coder` and `code-reviewer` are designed to be
+orchestrated as a loop (coder → reviewer → coder with the blocking
+findings → …).
 
-```bash
-cp agents/*/*.md ~/.claude/agents/          # user-level, all projects
-# or: mkdir -p .claude/agents && cp agents/*/*.md .claude/agents/   # this repo only
-```
-
-Invoke via the Task tool (`subagent_type: "paper-writer"`, …). `paper-writer`
-calls `lit-reviewer` on its own for the scoop check; `coder` and
-`code-reviewer` are designed to be orchestrated as a loop
-(coder → reviewer → coder with the blocking findings → …).
-
-**GitHub Copilot (VS Code)** — copy the `.agent.md` files:
-
-```bash
-mkdir -p .github/agents && cp agents/*/*.agent.md .github/agents/   # per-repo
-# or: mkdir -p ~/.copilot/agents && cp agents/*/*.agent.md ~/.copilot/agents/  # global
-```
-
-Then open Copilot Chat, switch the agent picker from "Agent" to the agent you
-want, and prompt it. (Copilot ports only exist where the instructions are
-model-agnostic prose — currently the two research agents.)
+**GitHub Copilot (VS Code)** — after `./install.sh`, open Copilot Chat and pick
+the agent from the agent dropdown. Give `paper-writer` the central claim, the
+key results, and the target venue; when it reaches the scoop-check step,
+switch the picker to `lit-reviewer` and hand it the scoped question. (Copilot
+ports only exist where the instructions are model-agnostic prose — currently
+the two research agents.)
 
 Prerequisite for the paper compile step: a LaTeX distribution with `pdflatex`
 (TeX Live, MiKTeX). The agent shells out to build the PDF; approve the first
 terminal run when VS Code asks.
+
+Prefer a per-project install instead of global? Copy the files by hand:
+`.md` → `.claude/agents/`, `.agent.md` → `.github/agents/`.
 
 ## latex/
 
@@ -69,7 +73,9 @@ minimal `template.tex` skeleton with the seven sections `paper-writer` uses.
 The agent copies the style it needs next to its draft — this directory is where
 it copies *from*. See `latex/README.md`.
 
-## Adding an agent
+## Contributing
+
+**Adding an agent:**
 
 1. Write `<name>.md` in Claude format: `name`/`description`/`tools` frontmatter,
    then the method. Name the failure mode it prevents.
@@ -77,6 +83,10 @@ it copies *from*. See `latex/README.md`.
    Copilot port: drop `tools:`/`model:`, add `argument-hint:`, keep the body.
    Frontmatter must be the first lines of the file.
 3. File both under `agents/<domain>/` and add a row to the catalog above.
+
+**Evals** (planned): each agent should ship with a small eval set — input
+fixtures plus expected verdicts — and a runner, so prompt edits are measurable
+instead of vibes. Contributors run them; users never need to touch them.
 
 ## Safety notes
 
