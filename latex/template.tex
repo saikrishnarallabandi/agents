@@ -1,0 +1,72 @@
+% Minimal paper skeleton for the paper-writer agent.
+%
+% Copy the venue style file you need next to this file (see latex/<venue>/),
+% then uncomment the matching \usepackage line below.
+%
+% The agent fills in each section to what it must ESTABLISH (see
+% agents/claude/paper-writer.md), not to a page budget.
+
+\documentclass{article}
+
+% --- pick one venue style ---
+\usepackage[preprint]{neurips_2025}  % NeurIPS  -> latex/neurips/neurips_2025.sty
+%\usepackage{aaai2027}                % AAAI     -> latex/aaai/aaai2027.sty (+ .bst)
+%\usepackage{acl}                    % *ACL     -> latex/acl/acl.sty (+ acl_natbib.bst)
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\title{Paper Title}
+\author{Author Name}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Write this LAST. Four to six sentences: a miniature of the whole paper.
+Opening is conditional -- familiar problem + surprising result leads with the
+achievement; unfamiliar framing opens with something every reader agrees with.
+Then why it is hard, what you did (one teaser sentence), the evidence with
+your most remarkable number. State assumptions and scope honestly.
+\end{abstract}
+
+\section{Introduction}
+% Establishes: the problem is important, the problem is hard, and you solved it.
+% Write the contributions FIRST -- two to four refutable bullets, each carrying
+% its section pointer. Every claim here must be discharged by a named section
+% (the claim ledger); check each one before finishing.
+
+\section{Background / Related Work}
+% Establishes the DIFF, not the inventory. Group by methodological commitment,
+% never paper-by-paper. Be generous with credit. Cite only what you have opened.
+
+\section{Method}
+% Establishes self-sufficiency: output and key idea FIRST, then mechanism.
+% Intuition and a worked toy example before the general case. Design
+% alternatives go to the appendix, not inline.
+
+\section{Experimental Setup}
+% Establishes reproducibility: datasets and splits, task and metrics, baselines
+% AND how they were tuned, hyperparameters and how selected, compute, seeds and
+% number of runs. Always state whether a number is a single run, a max, or a mean.
+
+\section{Results}
+% Establishes that the claim rests on data and logic. One subsection per claim,
+% each opening with a signpost. Narrate, do not re-key the tables. Report
+% negative and mixed results plainly.
+
+\section{Analysis and Limitations}
+% Write this BEFORE the abstract. Establishes what the results MEAN and where
+% they stop being true. Limitations name the MECHANISM that bounds the method
+% ("relies on limited morphology, as in English"), not surface facts about the
+% experiment grid ("we only evaluated on English").
+
+\section{Conclusion}
+% Establishes what changed, compressed and sharpened. Never merely restate the
+% abstract. Future work framed as a limitation, never a wish list. No puffery.
+
+\bibliographystyle{plain}
+\bibliography{references}  % provide references.bib, or swap style per venue
+
+\end{document}
