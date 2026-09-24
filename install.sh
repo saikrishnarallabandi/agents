@@ -53,4 +53,12 @@ if $INSTALL_COPILOT; then
   echo "              'chat.agentFilesLocations' setting."
 fi
 
+if $INSTALL_CLAUDE || $INSTALL_COPILOT; then
+  # LaTeX venue resources live in one shared spot; paper-writer looks here first.
+  LATEX_DEST="$HOME/.agents/latex"
+  mkdir -p "$LATEX_DEST"
+  cp -r "$REPO_DIR/latex/." "$LATEX_DEST/"
+  echo "LaTeX styles: copied to $LATEX_DEST"
+fi
+
 echo "Done."

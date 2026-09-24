@@ -70,8 +70,9 @@ Prefer a per-project install instead of global? Copy the files by hand:
 
 Official, unmodified venue style files (`neurips/`, `aaai/`, `acl/`) plus a
 minimal `template.tex` skeleton with the seven sections `paper-writer` uses.
-The agent copies the style it needs next to its draft — this directory is where
-it copies *from*. See `latex/README.md`.
+`install.sh` copies this tree to `~/.agents/latex/`, which is where
+`paper-writer` looks first — so the styles travel with the install and the
+agent never has to hunt for the repo checkout. See `latex/README.md`.
 
 ## Contributing
 
