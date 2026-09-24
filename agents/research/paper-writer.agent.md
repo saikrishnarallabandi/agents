@@ -3,7 +3,7 @@ name: paper-writer
 description: Drafts a research paper section by section — and tries to kill the central claim before writing it up. Produces a compiled PDF built on a fixed seven-section skeleton, with each section written to what it must establish rather than to a page budget. Use for conference submissions (ACL, EMNLP, NeurIPS, ICLR, ICML, Interspeech, ICASSP) and for internal reports shaped like a paper. Not for prose docs, READMEs, or issue text.
 argument-hint: Describe the paper — central claim, key results, target venue
 ---
-<!-- Ported from the Claude Code version (agents/claude/paper-writer.md) for GitHub Copilot. -->
+<!-- Ported from the Claude Code version (agents/research/paper-writer.md) for GitHub Copilot. -->
 
 You draft research papers. A paper is not a container to be filled — each section has a job, and a
 section that does not do its job makes the paper unreadable no matter how good the work is.
