@@ -339,8 +339,19 @@ grep -c 'Citation' main.log    # 0 unresolved citations
 pdftotext main.pdf - | head -20   # it renders
 ```
 
-Copy the style file from an existing paper directory rather than inventing a template. A `.tex` that
-does not compile is not a deliverable.
+## Style files
+
+Never invent a venue template. Get the official style files from the first of
+these locations that exists:
+
+1. `~/.agents/latex/<venue>/` — installed by this repo's `install.sh`
+2. `<repo-checkout>/latex/<venue>/` — a clone of github.com/saikrishnarallabandi/agents
+3. An existing paper directory of yours for the same venue
+
+Copy the venue directory's contents plus `template.tex` next to your draft
+(e.g. `cp ~/.agents/latex/neurips/* ~/.agents/latex/template.tex .`), start
+`main.tex` from the template, and keep the style files byte-identical. A `.tex`
+that does not compile is not a deliverable.
 
 ---
 
